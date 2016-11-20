@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .line{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+    <p>HTML FORM Element</p>
+    <p>Input, Button, Select, Option, TextArea</p>
+    <div>
+        <input type="button" value="btn1" id="btn1" class="line">
+        <button type="button" id="btn2" class="line">btn2</button>
+
+        <form id="fuxuan">
+            <input type="checkbox" value="apple">apple
+            <input type="checkbox" value="facebook">facebook
+            <input type="checkbox" value="google">google
+        </form>
+        <form>
+            <input type="file" id="uploadfile">
+            <!-- value属性只读，防止黑客欺骗用户 -->
+        </form>
+
+        <form>
+            <input type="hidden" value="xxxx">
+            <!-- 数据由表单提交，但对用户不可见 -->
+            <!-- 无事件处理程序 -->
+        </form>
+
+        <form>
+            <input type="password" id="pwd">
+        </form>
+
+        <form id="singleSelected">
+            <p>当用户单击其它单选按钮而导致这个单选按钮状态的改变，后者不触发onchange事件</p>
+            <p>单选元素的name必须相同</p>
+            <input type="radio" name="single" value="linkedin">linkedin
+            <input type="radio" name="single" value="ms">ms
+            <input type="radio" name="single" value="yahoo">yahoo
+            <input type="reset">
+            <!-- onclick默认重置 -->
+            <input type="button" id="reset2" value="重置的第二种方法">
+            <input type="submit">
+            <!-- onclick默认提交 -->
+        </form>
+
+        <form action="">
+            <p>单选</p>
+            <p>默认选择元素为第一个元素，通过添加selected="selected",指定默认选择元素</p>
+            <ul>两种修改方法
+                <li>对select对象修改selectedIndex属性</li>
+                <li>对option对象设置selected属性</li>
+            </ul>
+            <select name="" id="sel">
+                <option value="aa">aaa</option>
+                <option value="bb" selected="selected">bbb</option>
+                <option value="cc">ccc</option>
+            </select>
+            <input type="button" id="btn1_sel" value="选择第一个">
+            <input type="button" id="btn2_sel" value="选择第三个">
+        </form>
+
+        <form action="">
+            <p>多选</p>
+            <div>
+                <p>multiple 属性规定可同时选择多个选项。</p>
+                <ul>在不同操作系统中，选择多个选项的差异：
+                    <li>对于 windows：按住 Ctrl 按钮来选择多个选项</li>
+                    <li>对于 Mac：按住 command 按钮来选择多个选项</li>
+                    <li>由于上述差异的存在，同时由于需要告知用户可以使用多项选择，对用户更友好的方式是使用复选框。</li>
+                </ul>
+                <p>提示：可以把 multiple 属性与 size 属性配合使用，来定义可见选项的数目。</p>
+            </div>
+            <select name="" id="msel" multiple>
+                <option value="aa">aaa</option>
+                <option value="bb">bbb</option>
+                <option value="cc">ccc</option>
+            </select>
+        </form>
+
+        <form action="">
+            <input type="text" id="txt">
+        </form>
+
+        <form action="" id="taf" >
+            <textarea name="" id="ta" cols="30" rows="10"></textarea>
+        </form>
+
+    </div>
+
+    <script>
+        $ = function(selector){
+            return document.getElementById(selector);
+        };
+        var lg = console.log;
+
+        $("btn1").onclick = function(){
+            console.log("btn1")
+        };
+        $("btn2").onclick = function(){
+            console.log("btn2")
+        };
+
+        var fuxuan = $("fuxuan");
+
+        fuxuan.onclick = function (e) {
+            var v = e.target.value;
+            lg("select "+v);
+        };
+        fuxuan.onchange = function (e) {
+            var v = e.target.value;
+            lg("changed "+v);
+        };
+
+        $("uploadfile").onchange = function(e){
+            lg("have added file");
+        };
+
+        $("pwd").onchange = function () {
+            lg("finished inputing pwd");
+        };
+
+        var singleSelected = $("singleSelected");
+        singleSelected.onclick = function (e) {
+            var v = e.target.value;
+            lg("select "+v);
+        };
+        singleSelected.onchange = function (e) {
+            var v = e.target.value;
+            lg("changed "+v);
+        };
+        $("reset2").onclick = function (e) {
+            this.form.reset();
+            e.stopPropagation();
+        };
+
+
+        var sel = $("sel");
+        sel.onchange = function (e) {
+            lg(sel.selectedIndex + " selected");
+            var option = sel.options[sel.selectedIndex];
+            lg("value " + option.value);
+            lg("text " + option.text);
+        };
+
+
+        $("btn1_sel").onclick = function () {
+            sel.selectedIndex = 0;
+        };
+        $("btn2_sel").onclick = function () {
+            sel.options[2].selected = true;
+        };
+
+
+
+        var msel = $("msel");
+        msel.size = 2;
+        msel.onchange = function () {
+            var iArr = [];
+            var options = Array.prototype.slice.call(msel.options);
+            options.forEach(function(ele,i,arr){
+               if(ele.selected)
+                   iArr.push(ele.index);
+            });
+            lg(iArr);
+        };
+
+        var txt = $("txt");
+        txt.onchange = function () {
+            lg("this: " + this);
+            lg("value: " + txt.value);
+        };
+
+        var ta = $("ta");
+        ta.onchange = function () {
+            lg("this: " + this);
+            lg("value: " + ta.value);
+            //表单提交后返回文档的名字
+            $("taf").target = "new form";
+
+        };
+
+
+
+    </script>
+</body>
+</html>

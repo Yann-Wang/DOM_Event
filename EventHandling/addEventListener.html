@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>test addEventListener</div>
+	<button id="btn">btn</button>
+	<script>
+		var btn = document.getElementById("btn");
+		btn.addEventListener('click',function(){
+			console.log("call");
+		}, false);
+		btn.addEventListener('click',function(){
+			console.log("call");
+		}, false);
+		//以上两个都是匿名函数，这是两个不同的函数
+
+		var rightMenu = function(event){
+			console.log("call2");
+			var event = event || window.event;
+
+			if(event.preventDefault) event.preventDefault();
+			if(event.returnValue) event.returnValue = false;
+
+			event.stopPropagation();
+
+			return false;
+		}
+
+		btn.addEventListener('contextmenu',rightMenu, false);
+
+		btn.addEventListener('contextmenu',rightMenu, false);
+
+		//以上注册的是同一个函数， 所以只调用一次
+
+	</script>
+</body>
+</html>

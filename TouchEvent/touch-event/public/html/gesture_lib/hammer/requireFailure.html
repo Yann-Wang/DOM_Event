@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        #myElement {
+            background: silver;
+            height: 300px;
+            padding-top:100px;
+            text-align: center;
+            vertical-align:center;
+            font: 16px/30px Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div id="myElement"></div>
+<script src="../../javascripts/hammer.js"></script>
+<script>
+    var myElement = document.getElementById('myElement');
+    var hammer = new Hammer.Manager(myElement);
+
+    var singleTap = new Hammer.Tap({ event: 'singletap' });
+    var doubleTap = new Hammer.Tap({event: 'doubletap', taps: 2 });
+    var tripleTap = new Hammer.Tap({event: 'tripletap', taps: 3 });
+
+    hammer.add([tripleTap, doubleTap, singleTap]);
+
+    hammer.get('tripletap').recognizeWith([doubleTap, singleTap]);
+    hammer.get('doubletap').recognizeWith(singleTap);
+
+    hammer.get('doubletap').requireFailure(tripleTap);
+    hammer.get('singletap').requireFailure([tripleTap, doubleTap]);
+
+
+
+    /*// we want to recognize this simulatenous, so a quadrupletap will be detected even while a tap has been recognized.
+    hammer.get('doubletap').recognizeWith('singletap');
+    // we only want to trigger a tap, when we don't have detected a doubletap
+    hammer.get('singletap').requireFailure('doubletap');*/
+
+
+    hammer.on("doubletap", function(ev) {
+        myElement.textContent += ev.type +" ";
+    });
+</script>
+</body>
+</html>

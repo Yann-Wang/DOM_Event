@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+    <p>input 事件</p>
+    <p>input 事件：在文本插入到元素后才触发，这些事件不能取消，不能指定其事件对象中的最新文本，但它们能发出元素文本内容发生改变的通知。</p>
+    <ul>
+        <li>method1: HTML内联属性事件处理程序</li>
+        <li>method2: 属性事件处理程序</li>
+    </ul>
+    <form action="">
+        <label for="up">1： </label>
+        <input type="text" id="up" oninput="this.value= this.value.toUpperCase();" />
+        <br />
+        <label for="up2">2： </label>
+        <input type="text" id="up2" />
+    </form>
+    <script>
+        function forceToUpperCase(ele){
+            if(typeof ele === "string")
+                ele = document.getElementById(ele);
+            ele.oninput = upcase;
+            ele.onpropertychange = upcaseOnPropertyChange;
+
+            function upcase(event) {
+                this.value = this.value.toUpperCase();
+            }
+
+            function upcaseOnPropertyChange(event) {
+                var e = event || window.event;
+                if(e.propertyName === "value"){
+                    this.onpropertychange = null;
+                    this.value = this.value.toUpperCase();
+                    this.onpropertychange = upcaseOnPropertyChange;
+                }
+            }
+        }
+
+        forceToUpperCase("up2");
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>change事件</p>
+    <p>级联菜单</p>
+    <form action="">
+        <select name="sel1" id="sel1">
+            <option value="fir">a</option>
+            <option value="sec">b</option>
+            <option value="thi">c</option>
+        </select>
+        <select name="sel2" id="sel2">
+            <option value=""></option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
+    </form>
+    <script>
+        $ = function(selector){
+            return document.getElementById(selector);
+        };
+        var lg = console.log;
+
+        var arr1 = ["alibaba","baidu","tencent"];
+        var arr2 = ["netease","360","souhu"];
+
+        var sel1 = $("sel1");
+        var sel2 = $("sel2");
+        sel2.options.length = 0;
+        arr1.forEach(function (ele) {
+            var op = new Option(ele,ele,false,false);
+            sel2.options.add(op);
+        });
+
+        sel1.onchange = function(){
+            var i = sel1.options.selectedIndex;
+            var v = sel1[i].value;
+            if(v === "fir"){
+                insertOptionForSel2(arr1);
+            }
+            if(v === "sec"){
+                insertOptionForSel2(arr2);
+            }
+        };
+        function insertOptionForSel2(arr){
+            sel2.options.length = 0;
+            arr.forEach(function (ele) {
+                var op = new Option(ele,ele,false,false);
+                sel2.options.add(op);
+            });
+        }
+
+    </script>
+</body>
+</html>

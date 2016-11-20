@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="../stylesheets/swipe-demo1-button.css">
+</head>
+<body>
+    <p>手势：为了能跨浏览器支持手势，需要自行实现手势。</p>
+    <p>循序渐进增强：建立一套无需手势的界面，然后再将手势作为基本交互的增强。</p>
+
+    <h1>A Simple Switch</h1>
+    <h2>Power: <span id="status">OFF</span></h2>
+    <form action="/power">
+        <label for="power">Power:</label>
+        <!-- these DIVs don't do anything yet -->
+        <div class="switchwrap">
+            <div class="switch">
+
+            </div>
+            <input type="checkbox" id="power" />
+        </div>
+        <p><input type="submit" value="Submit"></p>
+    </form>
+
+    <script>
+        document.body.className = "js";
+
+        var isOn = false;
+        var $ = function (selector) {
+            return document.querySelector(selector);
+        };
+
+        function turnOn() {
+            $("#status").innerHTML = "ON";
+            isOn = true;
+        }
+
+        function turnOff() {
+            $("#status").innerHTML = "OFF";
+            isOn = false;
+        }
+
+        var theSwitch = $(".switch");
+
+        theSwitch.addEventListener('click',function (e) {
+            if(isOn){
+                theSwitch.style.left = '0px';
+                turnOff();
+            }else{
+                theSwitch.style.left = '119px';
+                turnOn();
+            }
+        });
+
+    </script>
+    <script src="../javascripts/swipe-demo1-button.js"></script>
+
+</body>
+</html>

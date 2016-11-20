@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        #myElement {
+            background: silver;
+            height: 300px;
+            padding-top:100px;
+            text-align: center;
+            vertical-align:center;
+            font: 16px/30px Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+<div id="myElement"></div>
+<script src="../../javascripts/hammer.js"></script>
+<script>
+    var myElement = document.getElementById('myElement');
+
+    // We create a manager object, which is the same as Hammer(), but without the presetted recognizers.
+    var mc = new Hammer.Manager(myElement);
+
+
+    // Tap recognizer with minimal 2 taps
+    mc.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
+    // Single tap recognizer
+    mc.add( new Hammer.Tap({ event: 'singletap' }) );
+
+
+    // we want to recognize this simulatenous, so a quadrupletap will be detected even while a tap has been recognized.
+    mc.get('doubletap').recognizeWith('singletap');
+    // we only want to trigger a tap, when we don't have detected a doubletap
+    mc.get('singletap').requireFailure('doubletap');
+
+
+    mc.on("singletap doubletap", function(ev) {
+        myElement.textContent += ev.type +" ";
+    });
+</script>
+</body>
+</html>

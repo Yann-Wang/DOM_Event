@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<input type="text" id="zip" data-allowed-chars="0123456789" data-messageid="zipwarn" />
+		<span id="zipwarn" style="color:red;visibility:hidden">只支持数字</span>
+	</div>
+	
+	<script>
+		(function(){
+			var inputelts = document.getElementsByTagName("input");
+
+			for(var i=0;i<inputelts.length;++i){
+				var elt = inputelts[i];
+                // skip some input that doesn't match conditions.
+                if(elt.type != "text" || !elt.getAttribute("data-allowed-chars"))
+                    continue;
+
+                // 在input元素上注册事件处理程序函数
+                // 传统的keypress事件处理程序能够在任何地方运行
+                // textInput 在 2010年后Safari 和chrome支持
+                // textinput  是3级DOM事件规范草案中的版本
+                if(elt.addEventListener){
+                    elt.addEventListener("keypress",filter,false);
+                    elt.addEventListener("textInput",filter,false);
+                    elt.addEventListener("textinput",filter,false);
+                }
+                else{
+                    // 不支持addEventListener()的IE也不会支持textinput
+                    elt.attachEvent("onkeypress",filter);
+                }
+			}
+
+			function filter(event){
+			    var e = event || window.event;
+                var target = e.target || e.srcElement;
+                var text = null;
+                if(e.type === "textinput" || e.type === "textInput")
+                    text = e.data;
+                else{
+                    // 这是传统的keypress事件
+                    // 对于可打印键的keypress事件， Firefox使用charCode
+                    var code = e.charCode || e.keyCode;
+                    // 如果按下的是任何形式的功能键，不要过滤它
+                    if(code < 32 || // ASCII控制字符
+                            e.charCode == 0 || // 功能键（仅指Firefox）
+                            e.ctrlKey || e.altKey // 按下辅助键
+                    )
+                        return;
+                    var text = String.fromCharCode(code);
+                }
+
+                var allowed = target.getAttribute("data-allowed-chars");
+                var messageid = target.getAttribute("data-messageid");
+                if(messageid)
+                    var messageElement = document.getElementById(messageid);
+
+                for(var i=0;i<text.length;++i){
+                    var c = text.charAt(i);
+                    if(allowed.indexOf(c) == -1){ // 这是不允许的字符吗？
+                        if(messageElement)
+                            messageElement.style.visibility = "visible";
+                        // 取消默认行为，所以不会插入文本
+                        if(e.preventDefault)
+                            e.preventDefault();
+                        if(e.returnValue)
+                            e.returnValue = false;
+                        return false;
+                    }
+                }
+
+                if(messageElement)
+                    messageElement.style.visibility = "hidden";
+            }
+		})();
+	</script>
+</body>
+</html>

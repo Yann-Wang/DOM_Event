@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #menu{
+            display:none;
+            position: absolute;
+            width:200px;
+        }
+    </style>
+</head>
+<body>
+<button id="btn">btn</button>
+<ul id="menu">
+    <li name="1">baidu</li>
+    <li name="2">alibaba</li>
+    <li name="3">tencent</li>
+    <li name="4">netease</li>
+    <li name="5">huawei</li>
+</ul>
+<script>
+    var btn = document.getElementById("btn");
+    var menu = document.getElementById("menu");
+
+    //在 btn上注册右键事件
+    btn.addEventListener("contextmenu",handler, false);
+
+    function handler(event) {
+        var event = event || window.event;
+
+        if(event.preventDefault) event.preventDefault();
+        if(event.returnValue) event.returnValue = false;
+
+        if(event.stopPropagation)
+            event.stopPropagation();
+        event.cancelBubble = true;
+
+        menu.style.display = "block";
+        // clientX,clientY   使用窗口坐标
+        // pageX,pageY   使用文档坐标
+        menu.style.left = event.clientX + 5 + "px";
+        menu.style.right = event.clientY + 5 + "px";
+        return false;
+    }
+
+    //在menu上注册click事件
+    menu.addEventListener("click",selectCompany, false);
+    function selectCompany(event) {
+        var event = event || window.event;
+        if(event.preventDefault) event.preventDefault();
+        if(event.returnValue) event.returnValue = false;
+        event.stopPropagation();
+
+        switch(event.target.attributes.name.value){
+            case "1":
+                location.href = "http://www.baidu.com/";
+                break;
+            case "2":
+                location.href = "http://www.alibaba.com/";
+                break;
+            case "3":
+                location.href = "http://www.tencent.com/";
+                break;
+            case "4":
+                location.href = "http://www.netease.com/";
+                break;
+            case "5":
+                location.href = "http://www.huawei.com/";
+                break;
+        }
+        return false;
+    }
+
+    function cancel() {
+        menu.style.display = "none";
+    }
+    document.addEventListener("click", cancel, false);
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body onclick="console.log('触发内联属性事件处理程序')">
+	<ul>布置事件回调的三种方法
+		<li>HTML内联属性事件处理程序</li>
+		<li>属性事件处理程序</li>
+		<li>addEventListener()方法</li>
+	</ul>
+	<div>trigger</div>
+	<script>
+		var div = document.querySelector("div");
+		div.onclick = function(){
+			console.log("触发属性事件处理程序");
+		};
+
+		div.addEventListener('click',function(){
+			console.log("触发addEventListener");
+		},false);
+	</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        .block{
+            width:100px;
+            height:100px;
+            background:red;
+            margin-left:10px;
+            -webkit-transition: margin-left 1s ease-out;
+            -moz-transition: margin-left 1s ease-out;
+            -o-transition: margin-left 1s ease-out;
+            transition: margin-left 1s ease-out;
+        }
+        .start{
+            margin-left:200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="block"></div>
+    <div><input type="button" value="start" id="btn"></div>
+    <div id="output"></div>
+    <script>
+        var $ = function (selector) {
+            return document.querySelector(selector);
+        };
+        var TRANSITION     = 'transition',
+                TRANSFORM      = 'transform',
+                TRANSITION_END = 'transitionend',
+                TRANSFORM_CSS  = 'transform',
+                TRANSITION_CSS = 'transition';
+
+        if(typeof document.body.style.webkitTransform !== undefined) {
+            TRANSITION = 'webkitTransition';
+            TRANSFORM = 'webkitTransform';
+            TRANSITION_END = 'webkitTransitionEnd';
+            TRANSFORM_CSS = '-webkit-transform';
+            TRANSITION_CSS = '-webkit-transition';
+        }
+
+
+        var dd = $(".block");
+        $('#btn').addEventListener('mousedown',function () {
+            dd.className = 'block start';
+        },false);
+
+        dd.addEventListener(TRANSITION_END,fn,false);
+        function fn(e) {
+            alert(e.type);
+            $('#output').innerHTML = "finished!";
+        }
+    </script>
+</body>
+</html>

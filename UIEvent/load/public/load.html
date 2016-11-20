@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>load 事件</p>
+    <p>当某一资源（HTML页面、图片、css、&lt;frameset&gt;、&lt;object&gt;、JavaScript文件）加载完成时触发</p>
+    <p>event target: Element, window, XMLHttpRequest, XMLHttpRequestUpload</p>
+
+    <div>
+        <img src="./images/1.jpg" alt="" id="e_img">
+    </div>
+
+
+
+    <script>
+        //img
+        var e_img = document.getElementById("e_img");
+        e_img.onload = function(event){
+            console.log("image loaded.");
+        };
+
+        //document
+        window.onload = function(event){
+            console.log("document loaded.");
+        };
+
+        // link
+        var ll = document.createElement("link");
+        ll.href = "./stylesheets/load.css";
+        ll.rel = "stylesheet";
+        ll.onload = function(){
+            console.log("css file loaded.");
+        };
+        document.head.appendChild(ll);
+
+        //script
+        var ss = document.createElement("script");
+        ss.src = "./javascripts/load.js";
+        ss.onload = function(){
+            console.log("script file loaded");
+        };
+        document.body.appendChild(ss);
+
+
+        // XMLHttpRequest
+        function getText(url,cb){
+            var r = new XMLHttpRequest();
+            r.open("GET",url);
+            r.onreadystatechange = function(){
+                if(r.readyState === 4 && r.status === 200){
+                    var type = r.getResponseHeader("Content-Type");
+                    if(type.match(/^text/)){
+                        cb(r.responseText);
+                    }
+                }
+            };
+            r.onload = function(){
+                console.log("request succ");
+            };
+
+            r.send(null);
+        }
+
+        getText("/load_event/get",fn);
+        function fn(data){
+            console.log("return: " + data);
+        }
+
+
+        //XMLHttpRequestUpload  onload
+        // see XMLHttpRequest-demo post4.html
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>click me</div>
+	<script>
+		var ele = document.querySelector('div');
+		ele.onclick = function(){
+			console.log("I'm the first,but I'm covered.");
+		};
+
+		ele.onclick = function(){
+			console.log("I win");
+		}
+	</script>
+	
+</body>
+</html>

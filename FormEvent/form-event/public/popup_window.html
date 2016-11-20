@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>MDN Example</title>
+    <script type="text/javascript">
+        function popupSend (oFormElement) {
+            if (oFormElement.method && oFormElement.method.toLowerCase() !== "get") {
+                alert("This script supports the GET method only.");
+                return;
+            }
+            var oField, sFieldType, nFile, sSearch = "";
+            for (var nItem = 0; nItem < oFormElement.elements.length; nItem++) {
+                oField = oFormElement.elements[nItem];
+                if (!oField.hasAttribute("name")) { continue; }
+                sFieldType = oField.nodeName.toUpperCase() === "INPUT" ? oField.getAttribute("type").toUpperCase() : "TEXT";
+                if (sFieldType === "FILE") {
+                    for (nFile = 0; nFile < oField.files.length; sSearch += "&" + escape(oField.name) + "=" + escape(oField.files[nFile++].name));
+                } else if ((sFieldType !== "RADIO" && sFieldType !== "CHECKBOX") || oField.checked) {
+                    sSearch += "&" + escape(oField.name) + "=" + escape(oField.value);
+                }
+            }
+            open(oFormElement.action.replace(/(?:\?.*)?$/, sSearch.replace(/^&/, "?")), "submit-" + (oFormElement.name || Math.floor(Math.random() * 1e6)), "resizable=yes,scrollbars=yes,status=yes");
+        }
+    </script>
+
+</head>
+
+<body>
+
+<form name="yourForm" action="/form_event/element" method="get" onsubmit="popupSend(this); return false;">
+    <p>First name: <input type="text" name="firstname" /><br />
+        Last name: <input type="text" name="lastname" /><br />
+        Password: <input type="password" name="pwd" /><br />
+        <input type="radio" name="sex" value="male" /> Male <input type="radio" name="sex" value="female" /> Female</p>
+    <p><input type="checkbox" name="vehicle" value="Bike" />I have a bike<br />
+        <input type="checkbox" name="vehicle" value="Car" />I have a car</p>
+    <p><input type="submit" value="Submit" /></p>
+</form>
+
+</body>
+</html>

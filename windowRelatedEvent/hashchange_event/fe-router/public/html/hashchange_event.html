@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+</head>
+<body>
+    <div id="wrapper">
+        <ul>
+            <li><a href="#/">turn white</a></li>
+            <li><a href="#/blue">turn blue</a></li>
+            <li><a href="#/green">turn green</a></li>
+        </ul>
+    </div>
+    <script src="../javascripts/router2.js"></script>
+    <script src="../javascripts/ajax.js"></script>
+    <script>
+        var content = document.querySelector('#wrapper');
+        // change Page anything
+        function changeBgColor(url) {
+            //content.style.backgroundColor = color;
+
+            getText(url,function (data) {
+                content.innerHTML = data;
+            })
+        }
+
+        Router.route('/fe_router', function() {
+            //changeBgColor('/');
+            return;
+        });
+
+        Router.route('/', function() {
+            changeBgColor('/fe_router');
+        });
+        Router.route('/blue', function() {
+            changeBgColor('/fe_router/blue');
+        });
+        Router.route('/green', function() {
+            changeBgColor('green');
+        });
+    </script>
+</body>
+</html>

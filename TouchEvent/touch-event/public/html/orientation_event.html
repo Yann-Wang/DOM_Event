@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        .header{
+            width:100%;
+
+        }
+        .img{
+            display:block;
+            width:100%;
+            height:auto;
+        }
+
+
+    </style>
+    <link rel="stylesheet" href="../stylesheets/orientation.css">
+</head>
+<body>
+    <div class="header">
+        <img class="img" src="../images/1.jpg" alt="1.jpg">
+    </div>
+    <div class="bd">
+        <p>在window对象上有orientationchange,resize事件</p>
+        <p>css中可通过@media screen and (orientation: landscape)实现横向媒体查询</p>
+        <p id="status"></p>
+    </div>
+    <script src="../javascripts/orientation.js"></script>
+    <script>
+        //经测试window.orientation这个属性在Android浏览器中是存在的。
+        var orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
+        if(orientation.angle !== 0){
+            document.getElementById("status").innerHTML = "horizontal";
+        }else{
+            document.getElementById("status").innerHTML = "vertical";
+        }
+    </script>
+</body>
+</html>

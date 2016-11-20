@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sup{
+            height: 400px;
+            width: 400px;
+            margin:0 auto;
+            background:greenyellow;
+            position:relative;
+        }
+        .sub{
+            height:200px;
+            width:200px;
+            background:blueviolet;
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+
+        }
+        .sub2{
+            height:100px;
+            width:100px;
+            background:indianred;
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+
+        }
+        em{
+            color:red;
+        }
+    </style>
+</head>
+<body class="body">
+<p>mouseover & mouseout</p>
+<p>mouseover: 鼠标进入元素时触发。relatedTarget（IE中是fromElement）指的是鼠标来自的元素</p>
+<p>mouseout: 鼠标离开元素时触发。relatedTarget（IE中是toElement）指的是鼠标去往的元素</p>
+
+<ul>从sup进入sub
+    <li>supMouseout: to sub   <em>进入sub时，会触发sup中的mouseout事件</em></li>
+    <li>subMouseover:  from sup over: 0   进入sub时，会触发sub中的mouseover事件</li>
+    <li>supMouseover: from sup    进入sub时，sub中的mouseover事件冒泡，会触发sup中的mouseover事件</li>
+</ul>
+
+<ul>从sub进入sup
+    <li>subMouseout:   to sup out: 0   进入sup时，会触发sub中的mouseout事件</li>
+    <li>supMouseout: to sup   sub中的mouseout事件冒泡到sup中，触发sup中的mouseout事件</li>
+    <li>supMouseover: from sub    <em>触发sup中的mouseover事件</em></li>
+</ul>
+
+<div class="sup">
+    父元素
+    <div class="sub">子元素
+        <div class="sub2">孙元素</div>
+    </div>
+</div>
+
+
+
+<script>
+    var sub = document.getElementsByClassName("sub")[0];
+    sub.addEventListener('mouseover',fn,false);
+    var count =0;
+    function fn(event){
+        var fromNode = event.relatedTarget || event.fromElement;
+        console.log("subMouseover:  from " + fromNode.className + " over: " + count++);
+    }
+
+    sub.addEventListener('mouseout',fn2,false);
+    var count2 =0;
+    function fn2(event){
+        var toNode = event.relatedTarget || event.toElement;
+        console.log("subMouseout:   to " + toNode.className + " out: " + count2++);
+    }
+
+    var sup = document.getElementsByClassName("sup")[0];
+    sup.addEventListener("mouseover",ff,false);
+    function ff(event){
+        var fromNode = event.relatedTarget || event.fromElement;
+        console.log("supMouseover: from "+ fromNode.className);
+    }
+    sup.addEventListener("mouseout",ff2,false);
+    function ff2(event){
+        var toNode = event.relatedTarget || event.toElement;
+        console.log(" supMouseout: to "+ toNode.className);
+    }
+</script>
+</body>
+</html>

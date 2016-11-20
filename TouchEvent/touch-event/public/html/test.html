@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>document,Element的querySelector和querySelectorAll方法</p>
+    <ul>
+        <li>Element querySelector(string selectors)   返回当前元素的第一个匹配指定Css selectors（一个单独css选择器或一组由逗号分隔的选择器）的子孙元素。</li>
+        <li>NodeList querySelectorAll(string selectors)    返回当前元素的所有匹配指定selectors（ 一个单独css选择器或一组由逗号分隔的选择器 ）的子孙元素组成的类数组对象。这个方法返回的NodeList对象不是实时的：  是一张静态快照。</li>
+    </ul>
+    <p>操作querySelector和querySelectorAll方法获得的节点，dom上会有实时反映吗？  有！！！</p>
+    <div id="dd">
+        <p id="pp">dddddddd</p>
+    </div>
+    <script>
+        var pp = document.querySelector("#pp");
+        pp.style.backgroundColor = 'red';
+    </script>
+
+</body>
+</html>

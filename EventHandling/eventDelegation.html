@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>Click a table cell</p>
+	<table border="1">
+		<tr>
+			<td>row 1 column 1</td>
+			<td>row 1 column 2</td>
+		</tr>
+		<tr>
+			<td>row 2 column 1</td>
+			<td>row 2 column 2</td>
+		</tr>
+		<tr>
+			<td>row 3 column 1</td>
+			<td>row 3 column 2</td>
+		</tr>
+		<tr>
+			<td>row 4 column 1</td>
+			<td>row 4 column 2</td>
+		</tr>
+		<tr>
+			<td>row 5 column 1</td>
+			<td>row 5 column 2</td>
+		</tr>
+		<tr>
+			<td>row 6 column 1</td>
+			<td>row 6 column 2</td>
+		</tr>
+	</table>
+
+	<script>
+		document.querySelector('table').addEventListener('click',function(event){
+			if(event.target.tagName.toLowerCase()=='td'){
+				console.log(event.target.textContent);
+			}
+		},false);
+	</script>
+	
+</body>
+</html>

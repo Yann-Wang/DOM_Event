@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <p>message事件处理程序 event对象有三个属性（string data,WindowObject source, string sourceOrigin）</p>
+        <p>第一个参数：传递过来的消息；第二个参数：消息源自的window对象；第三个参数：指定消息来源；</p>
+        <p>message: <span id="message"></span></p>
+    </div>
+    <script>
+        var $ = function (selector) {
+            return document.querySelector(selector);
+        };
+
+        var cnt = $("#message");
+
+        if(window.addEventListener){
+            window.addEventListener("message",handleMessage,false);
+        }else{
+            window.attachEvent("onmessage",handleMessage);
+        }
+
+        function handleMessage(e) {
+            if(e.origin !== "http://localhost:3000")
+                return;
+
+            var msg = JSON.parse(e.data);
+            cnt.innerHTML = msg.data;
+
+
+            e.source.postMessage("got it!","http://localhost:3000");
+        }
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+    <p>为document.body注册键盘事件</p>
+    <script src="./Keymap.js"></script>
+    <script>
+        // 定义回调函数
+        function cb(event,keyid){
+            if(keyid == "v"){
+                console.log("touch v");
+                console.log(event.target.tagName);
+            }
+            return false;
+        }
+
+        function cb2(event,keyid) {
+            if(keyid == "ctrl_b"){
+                //window.open("http://www.wangyn.net/","_blank");
+                location.href = "http://www.wangyn.net/";
+            }
+            return false;
+        }
+
+        //添加对象{按键：回调函数}
+        var keyboardEvent = new Keymap({"v":cb});
+
+        //添加绑定元素
+        keyboardEvent.install(document.body);
+
+        //添加对象{按键：回调函数}
+        var openBlog = new Keymap({"ctrl_b":cb2});
+
+        //添加绑定元素
+        openBlog.install(document.body);
+    </script>
+</body>
+</html>

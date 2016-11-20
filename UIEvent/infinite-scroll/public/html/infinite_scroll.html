@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>infinite scroll</title>
+    <link rel="stylesheet" href="../stylesheets/screen.css" >
+
+</head>
+<body>
+    <img src="../images/0.jpg" alt="">
+    <div id="wrapper">
+
+    </div>
+</body>
+<script id="slide" type="text/x-handlebars-template">
+    <div class="slide">
+        <p class="logo"></p>
+        <div class="imgholder">
+            <a title="by {{ownername}} on Flickr" target="_blank"
+               href="http://huaban.com/{{owner}}/{{id}}"><img class="img" data-src="{{url_n}}"></a>
+            <p>{{title}}</p>
+        </div>
+    </div>
+</script>
+<script type="text/javascript" src="../javascripts/handlebars-v4.0.5.js"></script>
+<script type="text/javascript" src="../javascripts/bird_data.js"></script>
+<script type="text/javascript" src="../javascripts/scroller.js"></script>
+</html>

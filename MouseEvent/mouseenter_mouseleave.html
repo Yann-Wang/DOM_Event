@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .sup{
+            height: 400px;
+            width: 400px;
+            margin:0 auto;
+            background:greenyellow;
+            position:relative;
+        }
+        .sub{
+            height:200px;
+            width:200px;
+            background:blueviolet;
+            position:absolute;
+            left:0;
+            right:0;
+            top:0;
+            bottom:0;
+            margin:auto;
+
+        }
+    </style>
+</head>
+<body>
+    <p>mouseenter & mouseleave</p>
+    <p>mouseenter: 类似mouseover ,IE将其引入，HTML5将其标准化，尚未广泛实现</p>
+    <p>mouseleave: 类似mouseout , IE将其引入，HTML5将其标准化，尚未广泛实现</p>
+    <p>mouseenter: 在鼠标从元素外部移动到元素范围之内时触发。该事件不冒泡。在鼠标移动到后代元素上不会触发。移出元素范围也不会触发。</p>
+    <p>mouseleave: 在鼠标从元素内部移动到元素范围之外时触发。该事件不冒泡。在鼠标从后代元素移动到该元素时不会触发。移入元素范围也不会触发。</p>
+
+    <div class="sup">
+        父元素
+        <div class="sub">子元素</div>
+    </div>
+
+    <script>
+        var ele = document.getElementsByClassName("sup")[0];
+        ele.addEventListener('mouseenter',fn,false);
+        var count =0;
+        function fn(event){
+            console.log("enter: " + count++);
+        }
+
+        ele.addEventListener('mouseleave',fn2,false);
+        var count2 =0;
+        function fn2(event){
+            console.log("leave: " + count2++);
+        }
+    </script>
+</body>
+</html>

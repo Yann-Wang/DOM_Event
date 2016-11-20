@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        #trigger{
+            width:200px;
+            height:50px;
+            background:greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <p>事件：mousedown,mouseup,mousemove</p>
+    <div id="trigger"></div>
+    <div>status: <span id="output1"></span></div>
+    <div>status: <span id="output2"></span></div>
+    <script>
+        var $ = function (selector) {
+            return document.querySelector(selector);
+        };
+
+        var trigger = $('#trigger');
+        var move_count = 0;
+        trigger.addEventListener('mousedown',fn,false);
+        trigger.addEventListener('mouseup',fn,false);
+        trigger.addEventListener('mousemove',fn,false);
+
+
+        function fn(e) {
+            if(e.type == 'mousedown'){
+                $('#output1').innerHTML += " mousedown |";
+            }else if(e.type == 'mouseup'){
+                $('#output1').innerHTML += " mouseup |";
+            }else if(e.type == 'mousemove'){
+                $('#output2').innerHTML = move_count++;
+            }
+        }
+    </script>
+
+</body>
+</html>

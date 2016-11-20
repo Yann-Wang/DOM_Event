@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul> form表单 事件
+    <li>onreset     在表单元素重置之前调用。可通过返回false或取消这个事件来阻止重置。</li>
+    <li>onsubmit    在表单提交之前调用。可通过返回false或取消这个事件来阻止提交。</li>
+</ul>
+    
+    <ul>阻止reset的两种方法
+        <li>在onreset事件处理程序属性中返回false</li>
+        <li>通过preventDefault()来取消这个事件</li>
+    </ul>
+    <form action="/form_event/reset" method="post" name="f1">
+        <input type="text">
+        <input type="reset">
+        <input type="button" value="reset2" id="f1_reset2">
+    </form>
+
+    <p>直接调用reset()方法会像单击重置按钮一样触发reset事件处理程序,跟设置事件处理程序的方法没关系</p>
+    <form action="/form_event/reset" method="post" name="f2" onreset="alert('trigger'); return false;">
+        <input type="text">
+        <input type="reset">
+        <input type="button" value="reset2" onclick="f2_reset2();" id="f2_reset2">
+    </form>
+
+    <p>直接调用submit()方法不会触发submit事件处理程序，跟设置事件处理程序的方法没关系</p>
+    <form action="/form_event/submit" method="post" name="f3" >
+        <input type="text" name="cnt">
+        <input type="submit">
+        <input type="button" value="submit2" id="f3_submit2">
+    </form>
+
+    <script>
+        $ = function(selector){
+            return document.getElementById(selector);
+        };
+        var lg = console.log;
+
+        /* 阻止reset的两种方法 */
+        var f1 = document.f1;
+        /*f1.onreset = function () {
+            return false;
+        };*/
+
+        f1.onreset = function (e) {
+            alert("reset");
+            e.preventDefault();
+        };
+        $("f1_reset2").onclick =function () {
+            f1.reset();
+        };
+
+
+
+
+        /* reset()方法不触发HTML内联属性onreset事件处理程序 */
+        var f2 = document.f2;
+        $("f2_reset2").onclick =function () {
+
+            f2.reset();
+        };
+
+        /* 直接调用submit()方法不会触发HTML内联属性onsubmit事件处理程序 */
+        var f3 = document.f3;
+        f3.onsubmit = function () {
+            alert("trigger");
+            return false;
+        };
+        $("f3_submit2").onclick =function () {
+
+            f3.submit();
+        };
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        ul{
+            width:800px;
+            margin:0 auto 20px;
+            padding:20px;
+            padding-bottom:100px;
+            border: 3px solid #333;
+            border-radius: 5px;
+        }
+        li{
+            width: 700px;
+            margin:0 auto 5px;
+            padding:5px;
+            border: 3px solid #eee;
+            border-radius: 3px;
+        }
+        .droppable{
+            border:5px solid orangered;
+        }
+    </style>
+</head>
+<body>
+    <p>拖放源：任何有HTML draggable属性的文档元素都是拖放源。</p>
+    <p>拖放目标：任何元素都可以是拖放目标，只需要在拖放元素上定义4个事件监听程序。</p>
+    <p>拖放源事件： drag(一般不需要), dragstart, dragend</p>
+    <p>拖放目标事件：dragenter, dragover(一般不用，但要定义), dragleave, drop</p>
+    <ul class="dnd">
+        <li>1: first</li>
+        <li>1: second</li>
+        <li>1: third</li>
+        <li>1: four</li>
+    </ul>
+    <ul class="dnd">
+        <li>2: first</li>
+        <li>2: second</li>
+        <li>2: third</li>
+        <li>2: four</li>
+    </ul>
+    <script src="whenReady.js"></script>
+    <script src="drag_list.js"></script>
+</body>
+</html>

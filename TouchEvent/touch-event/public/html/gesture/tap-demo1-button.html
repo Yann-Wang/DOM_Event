@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>tap</title>
+    <link rel="stylesheet" href="../stylesheets/tap-demo1-button.css">
+</head>
+<body>
+    <p>触摸界面的轻触与桌面上的鼠标单击不同。</p>
+    <p>在触摸界面上，没有移动光标，没有悬停事件。</p>
+    <p>在触摸设备中，浏览器仍然会触发鼠标事件。用户轻触300ms之后将触发click事件，mousedown,mouseup事件也同时被出发。</p>
+    <p>为了创建体验良好的触摸界面，不要使用合成事件（比如click事件）</p>
+    <div id="touchme">
+        <a class="button" id="toggle"  href="javascript:;">Toggle Picture</a>
+        <div class="picture" style="display:none">
+            <p>Goldfinch by ibm4381 on Flickr</p>
+            <a href="http://www.baidu.com/">
+                <img src="../images/1.jpg" style="width:240px;height:160px;" alt="Goldfinch">
+            </a>
+        </div>
+    </div>
+    <script src="../javascripts/tap-demo1-button.js"></script>
+</body>
+</html>

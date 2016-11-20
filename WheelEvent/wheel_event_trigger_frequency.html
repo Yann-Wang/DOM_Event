@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            height:1000px;
+            background:greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <p>wheel event trigger frequency</p>
+    <script src="./addWheelListener2.js"></script>
+    <script>
+        //addWheelListener( cnt, wheelHandler,false );
+        var ele = document.body;
+        function wheelHandler(event){
+            console.log("deltaY: " + event.deltaY);
+            // 当前文档滚过的下边的像素值
+            console.log("pageYOffset: " + window.pageYOffset);
+        }
+        addWheelListener( ele, wheelHandler,false );
+    </script>
+</body>
+</html>

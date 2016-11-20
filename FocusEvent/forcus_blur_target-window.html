@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<p>window.onfocus,window.onblur</p>
+	<ul id="state"></ul>
+	<script>
+		var state = document.getElementById("state");
+		window.onfocus = function(){
+			var li = document.createElement("li");
+			var text = document.createTextNode("onfocus");
+			state.appendChild(li).appendChild(text);
+		};
+		window.onblur = function(){
+			var li = document.createElement("li");
+			var text = document.createTextNode("onblur");
+			state.appendChild(li).appendChild(text);	
+		}
+	</script>
+	
+</body>
+</html>

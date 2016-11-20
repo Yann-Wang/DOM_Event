@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>simulate trigger</p>
+    <p>模拟按键触发不会去执行浏览器本身支持的快捷键指令！！！（比如ctrl+h,F11等），但是会触发“自定义的按键组合事件回调函数”。</p>
+    <script src="./Keymap.js"></script>
+    <script>
+
+
+        //模拟触发
+
+        //document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "v", char: "v"}));
+        document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "a", char: "a",ctrlKey:true}));
+
+
+
+    </script>
+</body>
+</html>

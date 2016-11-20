@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>scroll</title>
+    <style>
+
+        body{
+            height: 1000px;
+            background:greenyellow;
+        }
+
+    </style>
+</head>
+<body>
+    <p>scroll 被所有浏览器支持</p>
+    <p>scroll 比 wheel触发的频率更高</p>
+    <p>scroll 在文档滚动时都会触发，不管通过什么方式实现滚动（触摸板/滚动条/鼠标滚轮），wheel智能通过鼠标滚轮来触发</p>
+
+
+<script>
+    // Reference: http://www.html5rocks.com/en/tutorials/speed/animations/
+
+    var last_known_scroll_position = 0;
+    /*var ticking = false;
+
+    function doSomething(scroll_pos) {
+        // do something with the scroll position
+        console.log(scroll_pos);
+    }*/
+
+    window.addEventListener('scroll', function(e) {
+        //readonly long screenY   当前窗口的左上角在屏幕中的Y坐标。
+        last_known_scroll_position = window.scrollY;
+
+        console.log(last_known_scroll_position);
+
+
+
+        /*if (!ticking) {
+            window.requestAnimationFrame(function() {
+                doSomething(last_known_scroll_position);
+                ticking = false;
+            });
+        }
+        ticking = true;*/
+    });
+</script>
+</body>
+</html>

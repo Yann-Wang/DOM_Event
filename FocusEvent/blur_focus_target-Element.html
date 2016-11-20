@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	
+</head>
+<body>
+
+	<div class="dd">
+		<p>blur, focus, focusin, focusout </p>
+		<p>Target: Element</p>
+		<p>当元素因鼠标或者Tab切换失去焦点时触发</p>
+		<p>There are two ways of implementing event delegation for this event : by using the focusout event in browsers that support it (all browsers but Firefox), or by setting the "useCapture" parameter of addEventListener to true:</p>
+		<p></p>
+	</div>
+	<form id="form">
+	  <input type="text" placeholder="text input">
+	  <input type="password" placeholder="password">
+	</form>
+	<script>
+		var form = document.getElementById("form");
+		form.addEventListener("focus", function( event ) {
+		  event.target.style.background = "pink";    
+		}, false);
+		form.addEventListener("blur", function( event ) {
+		  event.target.style.background = "";    
+		}, false);
+	</script>
+	
+</body>
+</html>

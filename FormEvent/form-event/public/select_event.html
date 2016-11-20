@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <ul>选择文本有三种办法
+        <li id="ll">用鼠标或键盘手动选择</li>
+        <li>select()方法   (会触发两次select事件)</li>
+        <li>setSelectionRange()方法</li>
+        <p>后两种方法也都会触发select事件</p>
+    </ul>
+    <form action="">
+        <input type="text" id="tt">
+        <input type="button" value="select111" id="btn1">
+        <input type="button" value="setSelectionRange" id="btn2">
+    </form>
+    <script>
+        $ = function(selector){
+            return document.getElementById(selector);
+        };
+
+        var tt = $("tt");
+        var ll = $("ll");
+        //注册select事件
+        tt.onselect = function () {
+            console.log(getSelectedText(tt));
+        };
+        ll.onselect = function () {
+            console.log(getSelectedText(ll));
+        };
+
+        //获取文本
+        function getSelectedText(textbox){
+            if(typeof textbox.selectionStart == "number"){
+                return textbox.value.substring(textbox.selectionStart,textbox.selectionEnd);
+            } else if(document.selection){
+                return document.selection.createRange().text;
+            }
+        }
+
+        $("btn1").onclick = function () {
+            tt.select();
+        };
+
+        $("btn2").onclick = function () {
+            //tt.setSelectionRange(3,5);  //不兼容IE678
+            selectText(tt,3,5);
+        };
+
+        //选择部分文本  兼容IE6+, Firefox,Safari,Chrome,Opera
+        function selectText(textbox,startIndex,stopIndex){
+            if(textbox.setSelectionRange){
+                textbox.setSelectionRange(startIndex,stopIndex);
+            } else if(textbox.createTextRange){
+                var range = textbox.createTextRange();
+                range.collapse(true);
+                range.moveStart("character",startIndex);
+                range.moveEnd("character",stopIndex-startIndex);
+                range.select();
+            }
+        }
+    </script>
+</body>
+</html>

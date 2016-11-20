@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<a href="http://www.baidu.com/" target="_blank">don't click, we can trigger automatically.</a>
+	<script>
+		var divElement = document.querySelector('a');
+
+		divElement.addEventListener('click',function(event){
+			console.log(Object.keys(event));
+		},false);
+
+		// define   MouseEvent
+		var options = {
+			bubbles: true,
+			cancelable: true,
+			view: window
+		};
+		var simulateDivClick = new MouseEvent('click', options);
+
+
+		/*
+		deprecated !!!
+		 var simulateDivClick = document.createEvent('MouseEvents');
+		//initMouseEvent(type,bubbles,cancelable,view,detail,screenx,screeny,clientx,clienty,ctrlKey,altKey,shiftKey,metaKey,button,relatedTarget)
+		simulateDivClick.initMouseEvent('click',true,true,document.defaultView,0,0,0,0,0,false,false,false,false,0,null);
+		*/
+
+		divElement.dispatchEvent(simulateDivClick);
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        html{
+            height:100%;
+            background:greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <p>触摸事件：touchstart,touchmove,touchend,touchcancel</p>
+    <p>兼容性：iOS版Safari,Android版WebKit,OS6+的BlackBerry WebKit,Opera Mobile 10.1+。桌面版Firefox 6+和Chrome也支持触摸事件。</p>
+    <ul>除了常见的DOM属性外，触摸事件还包含下列三个用于跟踪触摸的属性。
+        <li>touches：表示当前跟踪的触摸操作的Touch对象的数组。</li>
+        <li>targetTouches：特定于事件目标的Touch对象的数组。</li>
+        <li>
+            <ul>changeTouches：
+                <li>对于 touchstart 事件, 这个 TouchList 对象列出在此次事件中新增加的触点。</li>
+                <li>对于 touchmove 事件，列出和上一次事件相比较，发生了变化的触点。</li>
+                <li>对于 touchend ，列出离开触摸平面的触点（这些触点对应已经不接触触摸平面的手指）。</li>
+            </ul>
+        </li>
+    </ul>
+    <p>每个Touch对象包含下列属性：clientX,clientY,identifier,pageX,pageY,screenX,screenY,target</p>
+
+    <div id="output"></div>
+    <script src="../javascripts/touch_event.js"></script>
+</body>
+</html>

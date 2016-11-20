@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>Title</title>
+    <style>
+        iframe{
+            height:200px;
+            width: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>window.postMessage(string message, string targetOrigin)</p>
+        <p>第一个参数：要传递的消息；第二个参数：指定目标窗口的源</p>
+        <label for="cnt">cnt: </label>
+        <input type="text" id="cnt">
+        <br />
+        <input id="pM" type="button" value="postMessage">
+        <br />
+        <label for="feedback">feedback: </label>
+        <input type="text" id="feedback">
+    </div>
+    <iframe id="child" src="http://localhost:4000/message.html"></iframe>
+    <script>
+        var $ = function (selector) {
+            return document.querySelector(selector);
+        };
+
+        var cnt = $("#cnt");
+        var pM = $("#pM");
+        var feedback = $("#feedback");
+
+        pM.addEventListener('mousedown',cb,false);
+
+        function cb() {
+            var msg = {data:cnt.value};
+            var origin = "http://localhost:4000";
+            window.frames[0].postMessage(JSON.stringify(msg),origin);
+        }
+
+        if(window.addEventListener){
+            window.addEventListener("message",fb,false);
+        }else{
+            window.attachEvent("onmessage",fb);
+        }
+
+        function fb(e) {
+            if(e.origin !== "http://localhost:4000")
+                return;
+
+            feedback.value = e.data;
+        }
+
+
+    </script>
+</body>
+</html>

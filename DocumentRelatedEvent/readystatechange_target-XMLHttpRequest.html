@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <p>readystatechange, target: XMLHttpRequest</p>
+    <script>
+        function postInfo(url,cb,msg){
+            var r = new XMLHttpRequest();
+            r.open('POST',url,false);
+            r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+            r.onreadystatechange = function(){
+                if(r.readystate === 4 && r.status === 200 ){
+                    var type = r.getResponseHeader("Content-Type");
+                    if(type.match(/^text/))
+                        cb(r.responseText);
+                }
+            };
+            r.send(msg);
+        }
+    </script>
+</body>
+</html>

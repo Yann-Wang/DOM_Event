@@ -7,6 +7,7 @@
 <body>
     <p>simulate trigger</p>
     <p>模拟按键触发不会去执行浏览器本身支持的快捷键指令！！！（比如ctrl+h,F11等），但是会触发“自定义的按键组合事件回调函数”。</p>
+    <p>全屏有专用的js命令</p>
     <script src="./Keymap.js"></script>
     <script>
 
@@ -15,6 +16,74 @@
 
         //document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "v", char: "v"}));
         document.body.dispatchEvent(new KeyboardEvent("keydown", { key: "a", char: "a",ctrlKey:true}));
+
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement &&    // alternative standard method
+                    !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) {
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) {
+                    document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                }
+            } else {
+                if (document.cancelFullScreen) {
+                    document.cancelFullScreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitCancelFullScreen) {
+                    document.webkitCancelFullScreen();
+                }
+            }
+        }
+
+        document.addEventListener("keydown", function(e) {
+            if (e.keyCode == 13) {
+                toggleFullScreen();
+                console.log("reached!");
+            }
+        }, false);
+
+        //document.dispatchEvent(new KeyboardEvent("keydown", { key: "enter",keyCode: 13,shiftKey:false}));
+        function fireKeyEvent(el, evtType, keyCode){
+            var doc = el.ownerDocument,
+                    win = doc.defaultView || doc.parentWindow,
+                    evtObj;
+            if(doc.createEvent){
+                if(win.KeyEvent) {
+                    evtObj = doc.createEvent('KeyEvents');
+                    evtObj.initKeyEvent( evtType, true, true, win, false, false, false, false, keyCode, 0 );
+                }
+                else {
+                    evtObj = doc.createEvent('UIEvents');
+                    Object.defineProperty(evtObj, 'keyCode', {
+                        get : function() { return this.keyCodeVal; }
+                    });
+                    Object.defineProperty(evtObj, 'which', {
+                        get : function() { return this.keyCodeVal; }
+                    });
+                    evtObj.initUIEvent( evtType, true, true, win, 1 );
+                    evtObj.keyCodeVal = keyCode;
+                    if (evtObj.keyCode !== keyCode) {
+                        console.log("keyCode " + evtObj.keyCode + " 和 (" + evtObj.which + ") 不匹配");
+                    }
+                }
+                el.dispatchEvent(evtObj);
+            }
+            else if(doc.createEventObject){
+                evtObj = doc.createEventObject();
+                evtObj.keyCode = keyCode;
+                el.fireEvent('on' + evtType, evtObj);
+            }
+        }
+
+
+        fireKeyEvent(document.body, 'keydown', 13);
+
+
+
 
 
 

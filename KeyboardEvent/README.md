@@ -1,6 +1,7 @@
 ## keyboard event
 
 ### keyboard event
+- keydown, keyup, keypress
 - 为document.body注册键盘事件，设置指定按键的事件回调函数
 
 ### clipboard event

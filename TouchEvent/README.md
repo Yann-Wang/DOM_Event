@@ -1,8 +1,8 @@
 ## touch event
 
 ### touch event
-- 触摸事件：touchstart,touchmove,touchend,touchcancel
-- 兼容性：iOS版Safari,Android版WebKit,OS6+的BlackBerry WebKit,Opera Mobile 10.1+。桌面版Firefox 6+和Chrome也支持触摸事件。
+- 触摸事件：touchstart, touchmove, touchend, touchcancel
+- 兼容性：iOS版Safari, Android版WebKit, OS6+的BlackBerry WebKit, Opera Mobile 10.1+。桌面版Firefox 6+和Chrome也支持触摸事件。
 - 除了常见的DOM属性外，触摸事件还包含下列三个用于跟踪触摸的属性。
     - touches：表示当前跟踪的触摸操作的Touch对象的数组。
     - targetTouches：特定于事件目标的Touch对象的数组。

@@ -15,3 +15,6 @@
 ### popstate event
 - 在用户使用“后退”或“前进”按钮时触发
 
+### storage event
+- 当同源窗口设置、删除localStorage, sessionStorage中的键值对时触发storage事件
+

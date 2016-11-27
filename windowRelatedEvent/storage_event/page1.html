@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <title>page1</title>
+</head>
+<body>
+    <p>storage事件：通过addEventListener方法或window.onstorage属性</p>
+    <p>window.onstorage属性的方式，Firefox不支持</p>
+
+    <ul>localStorage和sessionStorage的区别在于存储的有效期和作用域的不同：
+        <li>有效期：localStorage存储的数据是永久性的；sessionStorage的有效期和使用sessionStorage的脚本所在的标签页的有效期一样，当标签被关闭了，sessionStorage中存储的数据就被删除了。</li>
+        <li>作用域：sessionStorage的作用域是限定在文档源（document origin）级别的,同时也受到浏览器供应商的限制；sessionStorage的作用域限定在使用它的标签页中（同一个标签页中的两个iframe可以共享sessionStorage）</li>
+    </ul>
+
+    <p>对存储空间大小的限制都是以每个来源（协议、域、端口）为单位的。</p>
+    <p>对localStorage而言，大多数桌面浏览器会设置每个来源5MB的限制。Chrome和Safari对每个来源的限制是2.5MB.而iOS版Safari和Android版WebKit的限制也是2.5MB。</p>
+    <p>对sessionStorage的限制也是因浏览器而异。有的浏览器对sessionStorage的大小没有限制，但Chrome, Safari, iOS版Safari和Android版WebKit都有限制，也都是2.5MB。IE8+和Opera对sessionStorage的限制是5MB.</p>
+
+    <p>page1中向localStorage存入数据</p>
+    <p>page2中设置storage事件监听函数</p>
+    <script src="./storage.js"></script>
+    <script>
+
+        var stg = new Cache();
+
+        stg.setItem("x",1);
+        stg.setItem("y",{data:{lib:5}});
+
+    </script>
+
+</body>
+</html>

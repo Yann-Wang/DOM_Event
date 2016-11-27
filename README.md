@@ -1,7 +1,8 @@
-# DOM Event
+#### DOM Event
 
 
-## event category
+- the summary of DOM event is as follows.
+
 |category |event |
 |:--- |:--- |
 |CSSAnimationEvent | animationstart, animationiteration, animationend, transitionend|
